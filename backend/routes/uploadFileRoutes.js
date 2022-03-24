@@ -1,15 +1,17 @@
 const express = require('express')
 
 const { getFiles, setFiles, updateFiles, deleteFiles} = require('../controllers/uploadFilesController')
+const {protected} = require('../middleware/authMiddleware')
+
 
 const router = express.Router()
 
-router.get('/', getFiles)
+router.get('/',protected, getFiles)
 
-router.post('/',setFiles)
+router.post('/',protected,setFiles)
 
-router.put('/:id', updateFiles)
+router.put('/:id', protected,updateFiles)
 
-router.delete('/:id', deleteFiles)
+router.delete('/:id', protected, deleteFiles)
 
 module.exports = router
